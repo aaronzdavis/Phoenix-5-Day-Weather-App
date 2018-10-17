@@ -1,0 +1,25 @@
+<h1>Phoenix 5 Day Forecast</h1>
+
+<div id="forecast">
+  <% @five_day_forecast.each do |day| %>
+    <div class="day">
+      <div class="weather_icon">
+        <img src="http://openweathermap.org/img/w/<%= day['weather'][0]['icon'] %>.png">
+      </div>
+      <big>
+        <%= Time.at(day['dt']).strftime('%A') %>
+      </big>
+      <br>
+      <small>
+        <%= Time.at(day['dt']).strftime('%b %e') %>
+      </small>
+      <div class="details">
+        <p><%= day['weather'][0]['description'].titleize %></p>
+        <p>
+          <%= Weather.kelvin_to_fahrenheit(day['main']['temp_min']) %>°
+          —
+          <%= Weather.kelvin_to_fahrenheit(day['main']['temp_max']) %>°
+      </div>
+    </div>
+  <% end %>
+</div>
